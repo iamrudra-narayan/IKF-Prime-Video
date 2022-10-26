@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,1,25" />
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand fs-3 fw-bolder text-primary" href="/">I K F</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse pl-5" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+              </li>
+              {% if request.user.is_authenticated %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  My Account
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="{% url "profile" %}">Profile</a></li>
+                  <li class="nav-item dropdown">
+                  <li><a class="dropdown-item" href="{% url "create" %}">Create</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="{% url "logout" %}">Logout</a></li>
+                </ul>
+              </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url "register" %}">Register</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url "login" %}">Login</a>
+              </li>
+              {% endif %}
+            </ul>
+            <form class="d-flex nav-resp px-3" method="GET" action="{% url "search" %}">
+              <input class="form-control me-2" type="search" placeholder="Search Food or Restaurant" name="search" aria-label="Search">
+              <button class="btn btn-outline-success  d-flex align-items-center" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+      {% block content %}{% endblock %}
+      <footer>
+        <div class="container-fluid mt-5 px-3" style="background-color:rgba(202, 197, 197, 0.779);">
+          <div class="row d-flex flex-wrap-column">
+          <div class="container-fluid">
+            <a class="text-decoration-none text-dark" href="/"><p class="fs-1 ps-3 fw-bolder d-flex mt-3">INDIA KHELO FOOTBALL</p>
+          </div>
+            <div class="col-4 mr-3">
+              <div class="card-body d-flex justify-content-start flex-column">
+                <p class="card-text fs-6 fw-bolder">ABOUT IKF</p>
+                <a class="text-decoration-none text-dark" href=""><p class="card-text fs-6">Blog</p></a>
+                <a class="text-decoration-none text-dark" href=""><p class="card-text fs-6">Work with us</p></a>
+                <a class="text-decoration-none text-dark" href=""><p class="card-text fs-6">Contact Us</p></a>
+                <a class="text-decoration-none text-dark" href=""><p class="card-text fs-6">Sitemap</p></a>
+              </div>
+            </div>
+            <div class="col-4 mt-3 mr-3">
+              <p class="card-text fs-6 fw-bolder">LEARN MORE</p>
+                <a class="text-decoration-none text-dark" href=""><p class="card-text fs-6">Privacy</p></a>
+                <a class="text-decoration-none text-dark" href=""><p class="card-text fs-6">Security</p></a>
+                <a class="text-decoration-none text-dark" href=""><p class="card-text fs-6">Terms</p></a>
+            </div>
+            <div class="col-4 mt-3 mr-3">
+              <p class="card-text fs-6 fw-bolder">SOCIAL LINKS</p>
+              <a class="text-decoration-none text-dark" href=""><ion-icon name="logo-facebook" size="small" color="black"></ion-icon></a>
+              <a class="text-decoration-none text-dark" href=""><ion-icon name="logo-instagram" size="small" color="black"></ion-icon></a>
+              <a class="text-decoration-none text-dark" href=""><ion-icon name="logo-youtube" size="small" color="black"></ion-icon></a>
+              <a class="text-decoration-none text-dark" href=""><ion-icon name="logo-twitter" size="small" color="black"></ion-icon></a>
+              <a class="text-decoration-none text-dark" href=""><ion-icon name="logo-linkedin" size="small" color="black"></ion-icon></a>
+              <a class="text-decoration-none text-dark" href=""><ion-icon name="logo-whatsapp" size="small" color="black"></ion-icon></a>
+            </div>
+            <p class="mt-3">Download app from</p>
+              <div class="d-flex app-d justify-content-start flex-row mb-3">
+                <a href="https://play.google.com/store/apps/details?id=com.application.zomato&gl=US"><img style="width:17vh;" src="https://b.zmtcdn.com/data/webuikit/23e930757c3df49840c482a8638bf5c31556001144.png"></a>
+                <a href="https://apps.apple.com/in/app/zomato-food-restaurants/id434613896"><img style="width:17vh;" class="ms-3"  src="https://b.zmtcdn.com/data/webuikit/9f0c85a5e33adb783fa0aef667075f9e1556003622.png"></a>
+              </div> 
+          </div>
+        </div>
+        <hr>
+        <p class="card-text px-2 pb-2" style="font-size:13px;">By continuing past this page, you agree to our Terms 
+          of Service, Cookie Policy, Privacy Policy and Content Policies. All trademarks are properties of
+           their respective owners. 2008-2022 © Zomato™ Ltd. All rights reserved.</p>
+        </div>
+      </footer>
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

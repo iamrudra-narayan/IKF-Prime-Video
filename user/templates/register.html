@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<div class="container-fluid d-flex justify-content-center px-3 py-2">
+  {% if messages %}
+            <div class="d-flex justify-content-center flex-column mt-3">
+              {% for message in messages %}
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                {% endfor %}
+            </div>  
+        {% endif %}
+    <form method="POST">{% csrf_token %}
+      <p class="card-text fs-2 fw-bolder py-4">Register Here</p>
+      <input class="form-control me-2 mt-3 app-ip" style="height:45px;width:280px;" type="text" name="fname" placeholder="First Name" id="fname" required>
+      <input class="form-control me-2 mt-3 app-ip" style="height:45px;width:280px;" type="text" name="lname" placeholder="Last Name" id="lname" required>
+      <input class="form-control me-2 mt-3 app-ip" style="height:45px;width:280px;" type="email" name="email" placeholder="Email" id="email" required>
+      <input class="form-control me-2 mt-3 app-ip" style="height:45px;width:280px;" type="password" name="password" placeholder="Password" id="password" required>
+      <input class="form-check-input mt-4" type="checkbox" value="" id="invalidCheck" required> <p class="mb-3">Agree to terms and conditions</p>
+      <button class="btn btn-outline-light bg-danger text-white fw-bold mt-2" style="height:45px;width:200px;" type="submit">Sign Up</button>
+      <p class="fs-6 fw-normal py-4">Already Registered. <a class="text-decoration-none text-danger" href="{% url 'login' %}">Login Here</a></p>
+    </form>
+  </div> 
+</div>
+{% endblock %}

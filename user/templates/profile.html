@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+{% block title %}My Profile{% endblock %}
+{% block content %}
+<section>
+    <div class="container">
+        {% if messages %}
+            <div class="d-flex justify-content-center flex-column mt-3">
+              {% for message in messages %}
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                {% endfor %}
+            </div>  
+        {% endif %}
+    </div>
+    <div class="container-fluid py-5 px-3">
+        <div class="container d-flex justify-content-center">
+            <p class="card-text fs-2 fw-bolder py-3">PROFILE</p>
+        </div>
+        <div class="container d-flex justify-content-center mb-4">
+            <img style="height:200px;width:200px;" src="https://cdn-icons-png.flaticon.com/512/1739/1739847.png"><br>
+        </div><br>
+        <div class="container d-flex justify-content-center flex-column">
+          {% if user %}
+          <label class="fw-bold me-4" for="fname">First Name:</label>
+          <input class="form-control me-2 mb-3 app-ip" style="height:33px;width:fit-content;" type="text" value="{{user.first_name}}" disabled>
+          <label class="fw-bold me-4" for="lname">Last Name:</label>
+          <input class="form-control me-2 mb-3 app-ip" style="height:33px;width:fit-content;" type="text" value="{{user.last_name}}" disabled>
+          <label class="fw-bold me-4" for="email">Email:</label>
+          <input class="form-control me-2 mb-3 app-ip" style="height:33px;width:content;" type="text" value="{{user.username}}" disabled>
+          {% else %}
+          <p class="card-text fs-4 fw-bolder py-3 text-warning">Complete Your Profile. </p>
+          {% endif %}
+        </div>
+        <div class="card-body d-flex justify-content-center flex-row flex-wrap">
+          <a class="text-decoration-none" href="{% url 'create' %}"><button class="btn btn-success me-3 mb-2">Take a Video</button></a>
+          <a class="text-decoration-none" href="{% url 'create' %}"><button class="btn btn-danger mb2">Upload From Files</button></a>
+        </div>
+        <div class="container-fluid px-4 d-flex justify-content-center flex-column">
+          {% if user_posts %}
+            <p class="card-text fs-2 fw-bolder py-3">Your Videos</p>   
+              <div class="d-flex flex-row justify-content-evenly flex-wrap mt-4 mb-5">
+                {% for post in user_posts %}
+                  <div class="card mb-4" style="width:50vh;">
+                    <video>
+                        <source src="{{post.video_file.url}}" type="video/mp4">
+                    </video>
+                    <div class="card-body d-flex justify-content-start flex-column">
+                      <a class="text-decoration-none text-dark" href="{% url 'show' post.slug %}"><p class="card-text" style="font-size:13px;font-weight:500;">{{post.title|slice:':50'}}</p></a>
+                      <p class="card-text" style="font-size:10px;">{{post.desc|slice:':100'}}</p>
+                      <p class="card-text" style="font-size:10px;">Venue: {{post.venue}}</p>
+                      <p class="card-text" style="font-size:10px;">{{post.created_at}}</p>
+                      <p class="card-text" style="font-size:10px;">Posted by: {{post.user.first_name}} {{post.user.last_name}}</p>
+                    </div>
+                    <div class="card-body d-flex justify-content-center flex-row">
+                      <a class="text-decoration-none" href="{% url 'edit-post' post.id %}"><button class="btn btn-primary me-3">Edit</button></a>
+                      <a class="text-decoration-none" href="{% url 'delete-post' post.id %}"><button class="btn btn-primary">Delete</button></a>
+                    </div>
+                  </div>             
+                {% endfor %}
+              </div>
+              {% else %}   
+              <div class="d-flex justify-content-center align-items-center  mt-4 ">
+                <p class="fs-4 fw-bolder text-warning">You have no videos uploaded.</p>
+              </div>  
+            </div>
+          {% endif %} 
+    </div>
+</section>
+{% endblock %}

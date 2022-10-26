@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block title %}{{post.title}}{% endblock %}
+{% block content %}
+<div class="container-fluid d-flex justify-content-center mt-4 flex-column flex-wrap w-100">
+    <video style="width:100%;" controls>
+        <source src="{{post.video_file.url}}" type="video/mp4">
+    </video>  
+    <div class="d-flex justify-content-start px-1 mt-2 flex-row flex-wrap" style="height:content;width:97%;">
+      <p class="card-text fw-normal me-2" style="font-size:13px;">{{post.title}}</p>
+    </div>
+    <div class="d-flex justify-content-start px-1 mt-2 flex-row" style="height:content;width:97%;">  
+      <p class="text-dark me-2" style="font-size:10px;">{{post.venue}}</p>
+      <p class="fw-normal text-dark" style="font-size:10px;">{{post.created_at}}</p></a> 
+    </div>
+    <div class="d-flex justify-content-start px-1 mt-2 flex-wrap" style="height:content;width:97%;">  
+      <p class="text-dark me-2" style="font-size:10px;">{{post.desc}}</p>
+    </div>
+  <hr>    
+    <div class="d-flex justify-content-start align-items-center flex-row">
+    <p class="fw-bold text-dark " style="font-size:10px;">Posted By- </p><a href="{% url 'users-profile' post.user.id %}" class="text-decoration-none"><p class="fw-bold text-primary ps-1 " style="font-size:10px;">{{post.user.first_name}} {{post.user.last_name}}</p></a>
+    </div>
+  <hr>
+</div>
+<div class="container-fluid px-2">
+    <p class="card-text fs-2 ps-1 fw-bolder py-3">Related Videos</p>   
+    <div class="d-flex flex-row justify-content-evenly flex-wrap mt-4 mb-5">
+        {% for post in posts %}
+          <div class="card mb-4" style="width: 65vh;">
+            <video>
+                <source src="{{post.video_file.url}}" type="video/mp4">
+            </video>
+            <div class="card-body d-flex justify-content-start flex-column">
+              <a class="text-decoration-none text-dark" href="{% url 'show' post.slug %}"><p class="card-text fw-bold" style="font-size:10px;">{{post.title|slice:':50'}}</p> 
+              <div class="d-flex justify-content-start mt-2 flex-row">
+                <p class="text-dark me-2" style="font-size:10px;">{{post.venue}}</p></a>   
+                <p class="text-dark" style="font-size:10px;">{{post.created_at}}</p></a>   
+              </div>       
+            </div>
+          </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

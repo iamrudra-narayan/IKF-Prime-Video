@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block title %}Search Results{% endblock %}
+{% block content %}
+<a class="text-decoration-none" href="/"><p class="card-text fs-4 text-danger fw-bolder px-4 py-3">&#8592 Back</p></a>
+<hr>  
+<section class="my-6">
+  <div class="container-fluid">
+  <p class="card-text fs-2 fw-bolder px-4 py-3">Delivery Foods in Choudwar</p>   
+    <div class="d-flex flex-row justify-content-evenly flex-wrap mt-4 mb-5">
+  {% if results %}    
+    {% if query %}   
+    <h2> 
+        {% with results.count as total_results %}
+        <p class="fs-4 fw-bolder px-4 py-3">Found {{ total_results }} result{{ total_results|pluralize }}</p>
+        {% endwith %}
+    </h2>
+    {% for product in results %}
+        <div class="card mb-5 d-flex flex-row" style="width: 200vh;">
+        <a class="text-decoration-none" href="{% url "category_products" product.prod_category.prod_item %}">
+        <img src="/media/{{product.video_file}}" class="card-img-top" style="height:100px;width:100px;" alt="hotel image"/>
+        <div class="card-body d-flex justify-content-start flex-column">
+          <p class="card-text fs-5 fw-bold">{{product.title}}</p>
+          <p class="card-text text-dark fs-6 fw-normal">{{product.desc}}</p></a>
+          <p class="card-text text-dark fs-6 fw-normal">{{product.user}}</p></a>
+        </div> 
+        </div> 
+    {% endfor %}
+    {% else %}
+    <h3>No results found.</h3>
+    {% endif %}  
+  {% else %}    
+    {% if query %}   
+    <h2> 
+        {% with shop_results.count as total_shop_results %}
+        <p class="fs-4 fw-bolder px-4 py-3">Found {{ total_shop_results }} result{{ total_shop_results|pluralize }}</p>
+        {% endwith %}
+    </h2>
+    {% for shop in profile_results %}
+        <div class="card mb-5 d-flex flex-row" style="width: 200vh;">
+        <a class="text-decoration-none" href="{% url "hotel_products" shop.id %}">
+        <img src="" class="card-img-top" style="height:100px;width:100px;" alt="hotel image"/>
+        <div class="card-body d-flex justify-content-start flex-column">
+          <p class="card-text fs-5 fw-bold">{{shop.first_name}} {{shop.last_name}}</p>
+          <p class="card-text text-dark fs-6 fw-normal">{{shop.username}}</p></a>
+        </div> 
+        </div> 
+    {% endfor %}
+    {% else %}
+    <h3>No results found.</h3>
+    {% endif %} 
+  {% endif %}   
+  </div>
+</section> 
+{% endblock %}
