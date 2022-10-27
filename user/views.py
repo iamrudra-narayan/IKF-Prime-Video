@@ -146,7 +146,6 @@ def search(request):
 
         #results = FoodProduct.objects.filter(Q(prod_name__icontains=query) | Q(prod_desc__icontains=query))
         results = Post.objects.filter(title__icontains=query)
-        results = Post.objects.filter(desc__icontains=query)
         profile_results = User.objects.filter(username__icontains=query)
 
     return render(request, 'search_results.html', {'query': query, 'results': results, 'profile_results': profile_results})   

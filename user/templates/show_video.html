@@ -16,8 +16,10 @@
       <p class="text-dark me-2" style="font-size:10px;">{{post.desc}}</p>
     </div>
   <hr>    
-    <div class="d-flex justify-content-start align-items-center flex-row">
-    <p class="fw-bold text-dark " style="font-size:10px;">Posted By- </p><a href="{% url 'users-profile' post.user.id %}" class="text-decoration-none"><p class="fw-bold text-primary ps-1 " style="font-size:10px;">{{post.user.first_name}} {{post.user.last_name}}</p></a>
+    <div class="d-flex justify-content-start align-items-center flex-row px-1">
+        <img class="rounded-circle" alt="10X10" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg" style="width:5vh;"
+          data-holder-rendered="true">
+        <a href="{% url 'users-profile' post.user.id %}" class="text-decoration-none pt-3"><p class="fw-bold text-primary ps-1" style="font-size:10px;">{{post.user.first_name}} {{post.user.last_name}}</p></a>
     </div>
   <hr>
 </div>
