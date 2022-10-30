@@ -1,4 +1,3 @@
-
 # Create your views here.
 from http.client import HTTPResponse
 from django.http import HttpResponse
@@ -9,7 +8,6 @@ from .models import Post
 from django.contrib.auth import login as auth_login 
 from django.contrib.auth import authenticate,logout
 from django.contrib.auth.decorators import login_required
-from .forms import PostForm
 
 
 
@@ -148,4 +146,7 @@ def search(request):
         results = Post.objects.filter(title__icontains=query)
         profile_results = User.objects.filter(username__icontains=query)
 
-    return render(request, 'search_results.html', {'query': query, 'results': results, 'profile_results': profile_results})   
+    return render(request, 'search_results.html', {'query': query, 'results': results, 'profile_results': profile_results}) 
+
+def takevideo(request):
+    return render(request, 'takevideo.html')     

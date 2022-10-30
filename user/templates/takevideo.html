@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block title %}{{user.first_name}} {{user.last_name}}{% endblock %}
+{% block content %}
+<div class="container">
+    <form action="." method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="card-body d-flex justify-content-center flex-row flex-wrap mt-3">
+            <a class="text-decoration-none" href=""><p class="btn btn-success me-2">Take a Video</p></a>
+            <a class="text-decoration-none" href="{% url 'create' %}"><p class="btn btn-danger">Upload From Files</p></a>
+        </div>
+        <h3 class="mt-5">Record Your Video</h3>
+        <div class="card mb-3" style="width:100%;">
+        <img src="{% url 'camera' %}" width="100%">
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+            <p class="fs-6 fw-bolder py-3 text-danger">Give Details of your Recording.</p>
+        </div>
+        <input class="form-control me-2 mt-1 app-ip" style="height:45px;width:280px;" type="text" name="match_id" placeholder="Match ID" id="matchid" required>
+        <input class="form-control me-2 mt-3 app-ip" style="height:45px;width:280px;" type="text" name="venue" placeholder="Match Venue" id="venue" required>
+          <textarea class="form-control w-100 mt-3" id="textAreaExample2" name="title" placeholder="Title" rows="4"></textarea>
+        <textarea class="form-control w-100 mt-3" id="textAreaExample2" name="desc" placeholder="Description" rows="10"></textarea>
+        <div class="container d-flex justify-content-center">
+            <button class="btn btn-outline-light bg-danger text-white fw-bold mb-5" style="height:45px;width:200px;" type="submit">Upload</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

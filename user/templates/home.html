@@ -6,7 +6,7 @@
     <p class="card-text fs-2 fw-bolder py-3">Match Videos</p>   
       <div class="d-flex flex-row justify-content-evenly flex-wrap mt-4 mb-5">
         {% for post in posts %}
-          <div class="card border-none mb-4" style="width: 50vh;">
+          <div class="card mb-4" style="width: 50vh;">
             <video>
                 <source src="{{post.video_file.url}}" type="video/mp4">
             </video>
