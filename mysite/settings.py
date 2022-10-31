@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-f_l%&yck&igaqkzo5_foi2+(tf_3b%hrqfmd33br*y0%o(pvs*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['157.245.107.120:8000','www.rudra.muduli','rudra.muduli']
 
 
 # Application definition
