@@ -9,17 +9,21 @@
             <a class="text-decoration-none" href="{% url 'create' %}"><p class="btn btn-danger">Upload From Files</p></a>
         </div>
         <h3 class="mt-5">Record Your Video</h3>
-        <div class="card mb-3" style="width:100%;">
-        <img src="{% url 'camera' %}" width="100%">
+        <div class="card mb-3" style="width:100%;border:3px solid red;">
+          <img src="{% url 'camera' %}" width="100%">
+        </div>
+        <div class="container d-flex justify-content-center mt-5 mb-4 flex-row">
+            <button class="btn btn-outline-light bg-primary text-white fw-normal mb-5 me-3" style="height:35px;width:110px;font-size:10px;" type="submit">Restart Recording</button>
+            <button class="btn btn-outline-light bg-danger text-white fw-normal mb-5" style="height:35px;width:100px;font-size:10px;" type="submit">Stop & Save</button>
         </div>
         <div class="d-flex justify-content-center align-items-center">
-            <p class="fs-6 fw-bolder py-3 text-danger">Give Details of your Recording.</p>
+            <p class="fs-6 fw-bolder py-3 text-primary">Give Details of your Recording.</p>
         </div>
-        <input class="form-control me-2 mt-1 app-ip" style="height:45px;width:280px;" type="text" name="match_id" placeholder="Match ID" id="matchid" required>
-        <input class="form-control me-2 mt-3 app-ip" style="height:45px;width:280px;" type="text" name="venue" placeholder="Match Venue" id="venue" required>
+        <input class="form-control me-2 mt-1 app-ip" style="height:45px;width:content;" type="text" name="match_id" placeholder="Match ID" id="matchid" required>
+        <input class="form-control me-2 mt-3 app-ip" style="height:45px;width:content;" type="text" name="venue" placeholder="Match Venue" id="venue" required>
           <textarea class="form-control w-100 mt-3" id="textAreaExample2" name="title" placeholder="Title" rows="4"></textarea>
         <textarea class="form-control w-100 mt-3" id="textAreaExample2" name="desc" placeholder="Description" rows="10"></textarea>
-        <div class="container d-flex justify-content-center">
+        <div class="container d-flex justify-content-center mt-5 mb-4">
             <button class="btn btn-outline-light bg-danger text-white fw-bold mb-5" style="height:45px;width:200px;" type="submit">Upload</button>
         </div>
     </form>

@@ -113,6 +113,23 @@ def editpost(request, id):
     return render(request, "editpost.html", {'post':user_posts})   
 
 @login_required(login_url='login')
+def takevideo(request):
+    login_user= User.objects.get(id=request.user.id)
+    if request.method == "POST":
+        match_id = request.POST.get('match_id') 
+        title = request.POST.get('title')
+        venue = request.POST.get('venue')
+        desc = request.POST.get('desc')
+        video_file = request.FILES['video_file']
+
+        post = Post(user=login_user,match_id=match_id, title=title, venue=venue, desc=desc, slug=title, video_file=video_file) 
+        post.save()
+        messages.success(request, f"Your post Uploaded Successfully.")
+        return redirect('/profile/')
+
+    return render(request, 'takevideo.html') 
+
+@login_required(login_url='login')
 def deletepost(request, id):
     user = User.objects.get(id = request.user.id)
     user_posts = Post.objects.filter(id=id)
@@ -147,6 +164,4 @@ def search(request):
         profile_results = User.objects.filter(username__icontains=query)
 
     return render(request, 'search_results.html', {'query': query, 'results': results, 'profile_results': profile_results}) 
-
-def takevideo(request):
-    return render(request, 'takevideo.html')     
+    
